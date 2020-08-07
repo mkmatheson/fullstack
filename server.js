@@ -1,4 +1,9 @@
-import config, { nodeEnv, logPounds } from "./config";
+import https from "https";
 
-console.log(config, nodeEnv);
-logPounds("Yay Server.js");
+https.get("https://www.byu.edu", (res) => {
+  console.log("Response status code: ", res.statusCode);
+
+  res.on("data", (chunk) => {
+    console.log(chunk.toString());
+  });
+});
