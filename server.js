@@ -1,9 +1,15 @@
-import https from "https";
+import http from "http";
 
-https.get("https://www.byu.edu", (res) => {
-  console.log("Response status code: ", res.statusCode);
-
-  res.on("data", (chunk) => {
-    console.log(chunk.toString());
-  });
+const server = http.createServer((req, res) => {
+  res.write("Hello HTTP!\n");
+  //line written to user after three seconds
+  setTimeout(() => {
+    res.write("I can stream!\n");
+    //terminate stream response
+    res.end();
+  }, 3000);
 });
+
+server.listen(8080);
+
+// server.on("request", //callback would go here normally);
