@@ -1,27 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import App from "./components/App";
 
-const Header = (props) => {
-  return <h1>{props.headerMessage}</h1>;
-};
+ReactDOM.render(<App />, document.getElementById("root"));
 
-const App = ({ welcomeMessage }) => {
-  return (
-    <div>
-      <Header headerMessage={welcomeMessage} /> <p>this is a paragraph</p>
-    </div>
+setTimeout(() => {
+  ReactDOM.render(
+    <div>Unmount Successful</div>,
+    document.getElementById("root")
   );
-};
-
-// App.propTypes = {
-//   headerMessage: React.PropTypes.string.isRequired,
-// };
-
-App.defaultProps = {
-  welcomeMessage: "Hello default!",
-};
-
-ReactDOM.render(
-  <App welcomeMessage="Hello props" />,
-  document.getElementById("root")
-);
+}, 5000);
