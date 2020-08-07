@@ -1,6 +1,4 @@
 <%- include('header') -%>
-<p>
-  <%= Math.random() %>
-</p>
-<p><%= content%></p>
+<!-- react will take over the content of this root div upon loading and rendering -->
+<div id="root"><p><%- content -%></p></div>
 <%- include('footer') -%>
