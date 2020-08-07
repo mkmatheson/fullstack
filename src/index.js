@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-//first React API I need is to render something -- an object!
-//first arg is what to render, second arg is where I want it rendered -- getElementById is a DOM API
+const color = Math.random() > 0.5 ? "blue" : "red";
+
 ReactDOM.render(
-  //first arg is html tag type, second arg is any attributes I want the tag to have, the rest are any children (props) I want the element to have
-  React.createElement("h1", null, "Hello React!"),
+  //This works because Babel was configured to compile this code into React
+  <h1 style={{ color: color }}>Hello React ft. JSX -- {Math.random()}</h1>,
   document.getElementById("root")
 );
