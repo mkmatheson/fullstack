@@ -1,10 +1,27 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-const color = Math.random() > 0.5 ? "blue" : "red";
+const Header = (props) => {
+  return <h1>{props.headerMessage}</h1>;
+};
+
+const App = ({ welcomeMessage }) => {
+  return (
+    <div>
+      <Header headerMessage={welcomeMessage} /> <p>this is a paragraph</p>
+    </div>
+  );
+};
+
+// App.propTypes = {
+//   headerMessage: React.PropTypes.string.isRequired,
+// };
+
+App.defaultProps = {
+  welcomeMessage: "Hello default!",
+};
 
 ReactDOM.render(
-  //This works because Babel was configured to compile this code into React
-  <h1 style={{ color: color }}>Hello React ft. JSX -- {Math.random()}</h1>,
+  <App welcomeMessage="Hello props" />,
   document.getElementById("root")
 );
