@@ -1,14 +1,13 @@
 import React from "react";
 import Header from "./Header";
 import ContestPreview from "./ContestPreview";
+import data from "../testData.json";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { test: 42, pageHeader: "naming contests" };
-  }
+  state = { test: 42, pageHeader: "naming contests", allContests: [] };
+
   componentDidMount() {
-    console.log("Did Mount");
+    this.setState({ allContests: data.contests });
   }
   componentWillUnmount() {
     console.log("Will umnount");
@@ -18,8 +17,8 @@ class App extends React.Component {
       <div>
         <Header headerMessage={this.state.pageHeader} />{" "}
         <div>
-          {this.props.contests.map((contest) => (
-            <ContestPreview key={contest.contestName} {...contest} />
+          {this.state.allContests.map((contest) => (
+            <ContestPreview key={contest.id} {...contest} />
           ))}
         </div>
       </div>
