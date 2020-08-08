@@ -8,11 +8,11 @@ class App extends React.Component {
   }
   componentDidMount() {
     console.log("Did Mount");
-    debugger;
+    // debugger;
   }
   componentWillUnmount() {
     console.log("Will umnount");
-    debugger;
+    // debugger;
   }
   //I could also nix the constructor and just have state = {test: 42}
   render() {
