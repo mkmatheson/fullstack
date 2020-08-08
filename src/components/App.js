@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "./Header";
+import ContestPreview from "./ContestPreview";
 
 class App extends React.Component {
   constructor(props) {
@@ -8,18 +9,19 @@ class App extends React.Component {
   }
   componentDidMount() {
     console.log("Did Mount");
-    // debugger;
   }
   componentWillUnmount() {
     console.log("Will umnount");
-    // debugger;
   }
-  //I could also nix the constructor and just have state = {test: 42}
   render() {
     return (
       <div>
         <Header headerMessage={this.state.pageHeader} />{" "}
-        <p>this is a number: {this.state.test}</p>
+        <div>
+          {this.props.contests.map((contest) => (
+            <ContestPreview key={contest.contestName} {...contest} />
+          ))}
+        </div>
       </div>
     );
   }

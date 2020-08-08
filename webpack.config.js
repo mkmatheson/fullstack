@@ -8,11 +8,6 @@ module.exports = {
   },
   module: {
     rules: [
-      //not necessary for webpack 4 or greater
-      // {
-      //   test: /\.json$/,
-      //   loader: "json-loader",
-      // },
       {
         test: /\.js$/,
         exclude: /node_modules/,
