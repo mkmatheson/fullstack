@@ -1,14 +1,22 @@
 import config from "./config";
 import apiRouter from "./api";
+import sassMiddleware from "node-sass-middleware";
+import path from "path";
 
 import express from "express";
 const server = express();
 
-//express takes care of everything else if I just add this line
+server.use(
+  sassMiddleware({
+    //where __dirname refers to the current directory
+    src: path.join(__dirname, "sass"),
+    dest: path.join(__dirname, "public"),
+  })
+);
+
 server.set("view engine", "ejs");
 
 server.get("/", (req, res) => {
-  //   res.send("Helloooooo Express!");
   res.render("index", {
     content: "Hello Express and EJS!",
   });
