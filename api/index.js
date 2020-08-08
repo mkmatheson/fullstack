@@ -1,11 +1,10 @@
 import express from "express";
+import data from "../src/testData.json";
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  //this is an API call, so send a JSON object as a response
-  res.send({ data: [] });
+router.get("/contests", (req, res) => {
+  res.send({ contests: data.contests });
 });
 
-//router must be exported in order to be used
 export default router;
