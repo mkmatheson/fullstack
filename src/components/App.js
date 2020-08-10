@@ -5,9 +5,13 @@ import Contest from "./Contest";
 import * as api from "../api";
 import propTypes from "prop-types";
 
-//If I want to make this compatible for older browsers, all I need to modify is this function
 const pushState = (stateObj, url) => {
   window.history.pushState(stateObj, "", url);
+};
+
+//this is a handler
+const onPopState = (handler) => {
+  window.onpopstate = handler;
 };
 
 class App extends React.Component {
@@ -15,12 +19,15 @@ class App extends React.Component {
     initialData: propTypes.object.isRequired,
   };
   state = this.props.initialData;
-  componentDidMount() {}
+  componentDidMount() {
+    onPopState((e) => {
+      this.setState({ currentContestId: (event.state || {}).currentContestId });
+    });
+  }
   componentWillUnmount() {
-    console.log("Will umnount");
+    onPopState(null);
   }
 
-  //eventually, this function will fetch content from the server, but for now it just receives the contestID
   fetchContest = (contestId) => {
     pushState({ currentContestId: contestId }, `/contest/${contestId}`);
     api.fetchContest(contestId).then((contest) => {
