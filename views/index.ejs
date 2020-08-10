@@ -1,4 +1,8 @@
+<script type="text/javascript">
+  window.initialData = <%- JSON.stringify(initialData) -%>;
+</script>
+
 <%- include('header') -%>
 <!-- react will take over the content of this root div upon loading and rendering -->
-<div id="root"><p><%- content -%></p></div>
+<div id="root"><p><%- initialMarkup -%></p></div>
 <%- include('footer') -%>

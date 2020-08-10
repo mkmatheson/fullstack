@@ -8,7 +8,6 @@ class App extends React.Component {
     pageHeader: "naming contests",
     allContests: this.props.initialContests,
   };
-
   componentDidMount() {}
   componentWillUnmount() {
     console.log("Will umnount");

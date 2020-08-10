@@ -18,9 +18,10 @@ server.set("view engine", "ejs");
 import serverRender from "./serverRender.js";
 server.get("/", (req, res) => {
   serverRender()
-    .then((content) => {
+    .then(({ initialMarkup, initialData }) => {
       res.render("index", {
-        content,
+        initialMarkup,
+        initialData,
       });
     })
     .catch(console.error);
