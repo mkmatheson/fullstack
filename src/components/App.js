@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./Header";
 import ContestList from "./ContestList";
 import Contest from "./Contest";
+import * as api from "../api";
 
 //If I want to make this compatible for older browsers, all I need to modify is this function
 const pushState = (stateObj, url) => {
@@ -22,9 +23,15 @@ class App extends React.Component {
   //eventually, this function will fetch content from the server, but for now it just receives the contestID
   fetchContest = (contestId) => {
     pushState({ currentContestId: contestId }, `/contest/${contestId}`);
-    this.setState({
-      pageHeader: this.state.contests[contestId].contestName,
-      currentContestId: contestId,
+    api.fetchContest(contestId).then((contest) => {
+      this.setState({
+        pageHeader: contest.contestName,
+        currentContestId: contest.id,
+        contests: {
+          ...this.state.contests,
+          [contest.id]: contest,
+        },
+      });
     });
   };
 
