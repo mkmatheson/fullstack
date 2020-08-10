@@ -3,6 +3,7 @@ import Header from "./Header";
 import ContestList from "./ContestList";
 import Contest from "./Contest";
 import * as api from "../api";
+import propTypes from "prop-types";
 
 //If I want to make this compatible for older browsers, all I need to modify is this function
 const pushState = (stateObj, url) => {
@@ -10,11 +11,10 @@ const pushState = (stateObj, url) => {
 };
 
 class App extends React.Component {
-  state = {
-    test: 42,
-    pageHeader: "naming contests",
-    contests: this.props.initialContests,
+  static propTypes = {
+    initialData: propTypes.object.isRequired,
   };
+  state = this.props.initialData;
   componentDidMount() {}
   componentWillUnmount() {
     console.log("Will umnount");
@@ -25,7 +25,6 @@ class App extends React.Component {
     pushState({ currentContestId: contestId }, `/contest/${contestId}`);
     api.fetchContest(contestId).then((contest) => {
       this.setState({
-        pageHeader: contest.contestName,
         currentContestId: contest.id,
         contests: {
           ...this.state.contests,
@@ -35,9 +34,21 @@ class App extends React.Component {
     });
   };
 
+  CurrentContest() {
+    return this.state.contests[this.state.currentContestId];
+  }
+
+  pageHeader() {
+    if (this.state.currentContestId) {
+      return this.CurrentContest().contestName;
+    }
+
+    return "Naming Contests";
+  }
+
   currentContent() {
     if (this.state.currentContestId) {
-      return <Contest {...this.state.contests[this.state.currentContestId]} />;
+      return <Contest {...this.CurrentContest()} />;
     } else {
       return (
         <ContestList
@@ -50,7 +61,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Header headerMessage={this.state.pageHeader} />
+        <Header headerMessage={this.pageHeader()} />
         {this.currentContent()}
       </div>
     );
