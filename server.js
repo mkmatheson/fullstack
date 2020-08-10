@@ -8,7 +8,6 @@ const server = express();
 
 server.use(
   sassMiddleware({
-    //where __dirname refers to the current directory
     src: path.join(__dirname, "sass"),
     dest: path.join(__dirname, "public"),
   })
@@ -30,7 +29,6 @@ server.get("/", (req, res) => {
 server.use("/api", apiRouter);
 server.use(express.static("public"));
 
-//listen to the same port and host :)
 server.listen(config.port, config.host, () => {
   console.info("Express listening on port ", config.port);
 });
