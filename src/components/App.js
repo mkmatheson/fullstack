@@ -4,7 +4,11 @@ import Header from "./Header";
 import ContestPreview from "./ContestPreview";
 
 class App extends React.Component {
-  state = { test: 42, pageHeader: "naming contests", allContests: [] };
+  state = {
+    test: 42,
+    pageHeader: "naming contests",
+    allContests: this.props.initialContests,
+  };
 
   componentDidMount() {
     axios
